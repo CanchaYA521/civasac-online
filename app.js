@@ -949,13 +949,14 @@ function setupSharedPaymentUI(data, id) {
     alert.className = 'shared-payment-alert';
     alert.innerHTML = `
         <div style="font-size: 24px;">⚠️</div>
-        <div style="flex-grow: 1;">
-            <strong>Link de Pago por Expirar</strong>
-            <div style="font-size: 14px;">Esta reserva está reservada temporalmente. Completa el pago antes de que expire.</div>
+        <div style="flex-grow: 1; text-align: left;">
+            <strong>¡Reserva Temporal Activa!</strong>
+            <div style="font-size: 14px; margin-top: 4px;">Tienes 15 minutos para completar el pago y asegurar los boletos.</div>
         </div>
         <div class="shared-payment-timer" id="payment-timer">15:00</div>
     `;
 
+    // Insert correctly in the grid
     container.insertBefore(alert, container.firstChild);
 
     // Insert Creator Info
