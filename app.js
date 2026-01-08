@@ -756,7 +756,9 @@ function initSharePaymentLink() {
 
             // Generate a fake payment link
             const paymentId = Math.random().toString(36).substring(2, 10).toUpperCase();
-            const paymentLink = `https://civasac.online/pago/${paymentId}`;
+            // encoded data simulation (in real app this comes from DB)
+            const data = btoa(JSON.stringify({ o: origin, d: destination, f: date, s: bus.service, t: bus.time, p: total, n: state.passengers[0]?.firstName + ' ' + state.passengers[0]?.lastName }));
+            const paymentLink = `https://civasac.online/?pago=${paymentId}&data=${data}`;
 
             const shareText = `🚌 CIVA SAC - Link de Pago\n\n` +
                 `Ruta: ${cities[origin]?.name || origin} → ${cities[destination]?.name || destination}\n` +
@@ -897,4 +899,118 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 2000);
         });
     }
+
+    // Check for shared payment link
+    checkPaymentLink();
 });
+
+function checkPaymentLink() {
+    const params = new URLSearchParams(window.location.search);
+    const paymentId = params.get('pago');
+    const data = params.get('data');
+
+    if (paymentId && data) {
+        try {
+            // Decode data
+            const decoded = JSON.parse(atob(data));
+
+            // Restore state simulation
+            state.search = {
+                origin: decoded.o,
+                destination: decoded.d,
+                date: decoded.f,
+                passengers: 1
+            };
+
+            state.selectedBus = {
+                service: decoded.s,
+                time: decoded.t
+            };
+
+            state.total = decoded.p - 5; // Subtract service fee
+
+            // Show payment page directly
+            showPage('payment');
+
+            // Update UI with special "Shared Link" mode
+            setupSharedPaymentUI(decoded, paymentId);
+
+        } catch (e) {
+            console.error('Error parsing payment link', e);
+        }
+    }
+}
+
+function setupSharedPaymentUI(data, id) {
+    const container = document.querySelector('.payment-container');
+
+    // Insert alert before form
+    const alert = document.createElement('div');
+    alert.className = 'shared-payment-alert';
+    alert.innerHTML = `
+        <div style="font-size: 24px;">⚠️</div>
+        <div style="flex-grow: 1;">
+            <strong>Link de Pago por Expirar</strong>
+            <div style="font-size: 14px;">Esta reserva está reservada temporalmente. Completa el pago antes de que expire.</div>
+        </div>
+        <div class="shared-payment-timer" id="payment-timer">15:00</div>
+    `;
+
+    container.insertBefore(alert, container.firstChild);
+
+    // Insert Creator Info
+    const info = document.createElement('div');
+    info.className = 'payment-creator-info';
+    info.innerHTML = `
+        <h4>Solicitud de Pago de: ${data.n}</h4>
+        <p>Esta persona ha iniciado la reserva. Solo necesitas completar el pago para confirmar los boletos.</p>
+    `;
+
+    const formContainer = document.querySelector('.payment-form');
+    formContainer.insertBefore(info, formContainer.firstChild);
+
+    // Start Timer
+    startPaymentTimer();
+
+    // Update summary manually since we jumped steps
+    document.getElementById('payment-subtotal').textContent = `S/ ${state.total}.00`;
+    document.getElementById('payment-total').textContent = `S/ ${data.p}.00`;
+
+    // Fill summary details
+    const summary = document.getElementById('payment-summary-details');
+    if (cities[data.o] && cities[data.d]) {
+        summary.innerHTML = `
+            <div class="summary-route">
+                <p><strong>${cities[data.o].name} → ${cities[data.d].name}</strong></p>
+                <p>${formatDate(data.f)} • ${data.t}</p>
+                <p>${data.s}</p>
+            </div>
+            <div class="summary-passengers">
+                <p>1 Pasajero (Reservado por ${data.n})</p>
+            </div>
+        `;
+    }
+}
+
+function startPaymentTimer() {
+    let minutes = 14;
+    let seconds = 59;
+    const timer = document.getElementById('payment-timer');
+
+    const interval = setInterval(() => {
+        seconds--;
+        if (seconds < 0) {
+            seconds = 59;
+            minutes--;
+        }
+
+        if (minutes < 0) {
+            clearInterval(interval);
+            alert('El link de pago ha expirado.');
+            window.location.href = '/';
+            return;
+        }
+
+        timer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }, 1000);
+}

@@ -1,0 +1,42 @@
+/* Shared Payment Link Styles */
+.shared-payment-alert {
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    animation: slideDown 0.5s ease;
+}
+
+.shared-payment-timer {
+    font-weight: bold;
+    color: #dc3545;
+    background: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid #dc3545;
+}
+
+.payment-creator-info {
+    background: aliceblue;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--primary);
+}
+
+.payment-creator-info h4 {
+    margin: 0 0 5px 0;
+    color: var(--primary);
+    font-size: 16px;
+}
+
+.payment-creator-info p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--dark-gray);
+}
