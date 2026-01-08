@@ -956,8 +956,8 @@ function setupSharedPaymentUI(data, id) {
         <div class="shared-payment-timer" id="payment-timer">15:00</div>
     `;
 
-    // Insert correctly in the grid
-    container.insertBefore(alert, container.firstChild);
+    // Insert alert BEFORE the container (outside CSS Grid)
+    container.parentNode.insertBefore(alert, container);
 
     // Insert Creator Info
     const info = document.createElement('div');
