@@ -19,47 +19,60 @@ const cities = {
     chiclayo: { name: 'Chiclayo', code: 'CHI' },
     piura: { name: 'Piura', code: 'PIU' },
     ica: { name: 'Ica', code: 'ICA' },
-    tacna: { name: 'Tacna', code: 'TAC' }
+    tacna: { name: 'Tacna', code: 'TAC' },
+    huancayo: { name: 'Huancayo', code: 'HYO' },
+    puno: { name: 'Puno', code: 'PUN' },
+    tarapoto: { name: 'Tarapoto', code: 'TPP' },
+    huanuco: { name: 'Huánuco', code: 'HUU' }
 };
 
 // Bus Data Generator
 function generateBuses(origin, destination) {
     const routes = {
-        'lima-arequipa': { duration: '15h', basePrice: 89 },
-        'lima-cusco': { duration: '22h', basePrice: 120 },
-        'lima-trujillo': { duration: '8h', basePrice: 65 },
-        'lima-ica': { duration: '4h', basePrice: 45 },
-        'lima-chiclayo': { duration: '12h', basePrice: 75 },
-        'lima-piura': { duration: '14h', basePrice: 85 },
-        'lima-tacna': { duration: '18h', basePrice: 110 },
-        'arequipa-cusco': { duration: '10h', basePrice: 70 },
-        'arequipa-tacna': { duration: '6h', basePrice: 50 },
-        'cusco-puno': { duration: '7h', basePrice: 55 }
+        'lima-arequipa': { duration: '15h', basePrice: 95 },
+        'lima-cusco': { duration: '22h', basePrice: 140 },
+        'lima-trujillo': { duration: '8h', basePrice: 75 },
+        'lima-ica': { duration: '4h', basePrice: 55 },
+        'lima-chiclayo': { duration: '12h', basePrice: 85 },
+        'lima-piura': { duration: '14h', basePrice: 95 },
+        'lima-tacna': { duration: '18h', basePrice: 130 },
+        'arequipa-cusco': { duration: '10h', basePrice: 85 },
+        'arequipa-tacna': { duration: '6h', basePrice: 60 },
+        'cusco-puno': { duration: '7h', basePrice: 65 },
+        'tarapoto-huanuco': { duration: '8h', basePrice: 80 },
+        'lima-tarapoto': { duration: '24h', basePrice: 150 },
+        'lima-huanuco': { duration: '10h', basePrice: 80 }
     };
 
     const key = `${origin}-${destination}`;
     const reverseKey = `${destination}-${origin}`;
-    const route = routes[key] || routes[reverseKey] || { duration: '10h', basePrice: 70 };
+    const route = routes[key] || routes[reverseKey] || { duration: '10h', basePrice: 80 };
 
     const times = ['06:00', '08:00', '10:00', '14:00', '16:00', '20:00', '22:00', '23:30'];
     const services = [
-        { type: 'Económico', multiplier: 1, amenities: ['WiFi', 'Baño'] },
-        { type: 'VIP', multiplier: 1.4, amenities: ['WiFi', 'Baño', 'Enchufe', 'Manta'] },
-        { type: 'Bus Cama', multiplier: 1.8, amenities: ['WiFi', 'Baño', 'Enchufe', 'Manta', 'Cena', 'Desayuno'] }
+        { type: 'Económico', multiplier: 1, amenities: ['WiFi', 'Baño'], discount: false },
+        { type: 'VIP', multiplier: 1.4, amenities: ['WiFi', 'Baño', 'Enchufe', 'Manta'], discount: true },
+        { type: 'Bus Cama', multiplier: 1.8, amenities: ['WiFi', 'Baño', 'Enchufe', 'Manta', 'Cena', 'Desayuno'], discount: false }
     ];
 
     return times.slice(0, 5 + Math.floor(Math.random() * 3)).map((time, i) => {
         const service = services[i % 3];
         const availableSeats = 20 + Math.floor(Math.random() * 20);
-        return {
+        const features = {
             id: `bus-${i}`,
             time,
             duration: route.duration,
             service: service.type,
             price: Math.round(route.basePrice * service.multiplier),
             amenities: service.amenities,
-            availableSeats
+            availableSeats,
+            hasDiscount: service.discount
         };
+
+        if (features.hasDiscount) {
+            features.originalPrice = Math.round(features.price * 1.15); // 15% more
+        }
+        return features;
     });
 }
 
@@ -225,6 +238,7 @@ function renderResults() {
                 </div>
             </div>
             <div class="bus-price">
+                ${bus.hasDiscount ? `<div class="original-price" style="text-decoration: line-through; color: #999; font-size: 14px;">S/ ${bus.originalPrice}.00</div> <div class="discount-badge" style="background: #ef4444; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; display: inline-block; margin-bottom: 4px;">OFERTA</div>` : ''}
                 <div class="price">S/ ${bus.price}.00</div>
                 <div class="per-person">por persona</div>
             </div>
@@ -754,11 +768,27 @@ function initSharePaymentLink() {
             const bus = state.selectedBus;
             const total = state.total + 5; // Including service fee
 
-            // Generate a fake payment link
+            // Generate a shortened payment link
             const paymentId = Math.random().toString(36).substring(2, 10).toUpperCase();
-            // encoded data simulation (in real app this comes from DB)
-            const data = btoa(JSON.stringify({ o: origin, d: destination, f: date, s: bus.service, t: bus.time, p: total, n: state.passengers[0]?.firstName + ' ' + state.passengers[0]?.lastName }));
-            const paymentLink = `https://civasac.online/?pago=${paymentId}&data=${data}`;
+
+            // Map services to codes
+            const serviceMap = { 'Económico': 'E', 'VIP': 'V', 'Bus Cama': 'C' };
+            const sCode = serviceMap[bus.service] || 'E';
+
+            // Minimal data payload
+            const payload = {
+                o: cities[origin].code, // Use 3-letter code
+                d: cities[destination].code,
+                f: date.replace(/-/g, ''), // 20260108
+                s: sCode,
+                t: bus.time.replace(':', ''), // 0800
+                p: total,
+                n: state.passengers[0]?.firstName + ' ' + state.passengers[0]?.lastName.charAt(0) // Name + Last Initial
+            };
+
+            // Encode: btoa is standard base64
+            const data = btoa(JSON.stringify(payload)).replace(/=/g, ''); // Remove padding
+            const paymentLink = `https://civasac.online/?p=${paymentId}&d=${data}`;
 
             const shareText = `🚌 CIVA SAC - Link de Pago\n\n` +
                 `Ruta: ${cities[origin]?.name || origin} → ${cities[destination]?.name || destination}\n` +
@@ -906,25 +936,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function checkPaymentLink() {
     const params = new URLSearchParams(window.location.search);
-    const paymentId = params.get('pago');
-    const data = params.get('data');
+    const paymentId = params.get('p') || params.get('pago'); // Support both
+    const data = params.get('d') || params.get('data');
 
     if (paymentId && data) {
         try {
             // Decode data
             const decoded = JSON.parse(atob(data));
 
+            // Reverse mapping helpers
+            const findCityByCode = (code) => Object.keys(cities).find(key => cities[key].code === code) || 'lima';
+            const serviceMap = { 'E': 'Económico', 'V': 'VIP', 'C': 'Bus Cama' };
+
+            // Reconstruct full date: YYYYMMDD -> YYYY-MM-DD
+            const formatDateStr = (str) => {
+                if (str.length === 8) return `${str.substr(0, 4)}-${str.substr(4, 2)}-${str.substr(6, 2)}`;
+                return str; // Fallback for old format
+            };
+
+            // Reconstruct time: HHMM -> HH:MM
+            const formatTimeStr = (str) => {
+                if (str.length === 4 && !str.includes(':')) return `${str.substr(0, 2)}:${str.substr(2, 2)}`;
+                return str;
+            };
+
+            const originKey = decoded.o.length <= 3 ? findCityByCode(decoded.o) : decoded.o;
+            const destKey = decoded.d.length <= 3 ? findCityByCode(decoded.d) : decoded.d;
+
             // Restore state simulation
             state.search = {
-                origin: decoded.o,
-                destination: decoded.d,
-                date: decoded.f,
+                origin: originKey,
+                destination: destKey,
+                date: formatDateStr(decoded.f),
                 passengers: 1
             };
 
             state.selectedBus = {
-                service: decoded.s,
-                time: decoded.t
+                service: serviceMap[decoded.s] || decoded.s, // Support both code and full string
+                time: formatTimeStr(decoded.t)
             };
 
             state.total = decoded.p - 5; // Subtract service fee
@@ -933,7 +982,9 @@ function checkPaymentLink() {
             showPage('payment');
 
             // Update UI with special "Shared Link" mode
-            setupSharedPaymentUI(decoded, paymentId);
+            // Ensure decoded.n (name) exists, fallback if short link didn't have it fully
+            const displayName = decoded.n || "Usuario";
+            setupSharedPaymentUI({ ...decoded, n: displayName, p: decoded.p, o: originKey, d: destKey, f: formatDateStr(decoded.f), t: formatTimeStr(decoded.t), s: state.selectedBus.service }, paymentId);
 
         } catch (e) {
             console.error('Error parsing payment link', e);
