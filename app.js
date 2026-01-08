@@ -756,7 +756,7 @@ function initSharePaymentLink() {
 
             // Generate a fake payment link
             const paymentId = Math.random().toString(36).substring(2, 10).toUpperCase();
-            const paymentLink = `https://civasac.com.pe/pago/${paymentId}`;
+            const paymentLink = `https://civasac.online/pago/${paymentId}`;
 
             const shareText = `🚌 CIVA SAC - Link de Pago\n\n` +
                 `Ruta: ${cities[origin]?.name || origin} → ${cities[destination]?.name || destination}\n` +
