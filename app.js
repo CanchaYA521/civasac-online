@@ -769,26 +769,26 @@ function initSharePaymentLink() {
             const total = state.total + 5; // Including service fee
 
             // Generate a shortened payment link
-            const paymentId = Math.random().toString(36).substring(2, 10).toUpperCase();
+            const paymentId = Math.random().toString(36).substring(2, 8).toUpperCase(); // Shorter ID
 
             // Map services to codes
-            const serviceMap = { 'Económico': 'E', 'VIP': 'V', 'Bus Cama': 'C' };
-            const sCode = serviceMap[bus.service] || 'E';
+            const serviceMap = { 'Económico': 'ECO', 'VIP': 'VIP', 'Bus Cama': 'CAMA' };
+            const sCode = serviceMap[bus.service] || 'ECO';
 
-            // Minimal data payload
-            const payload = {
-                o: cities[origin].code, // Use 3-letter code
-                d: cities[destination].code,
-                f: date.replace(/-/g, ''), // 20260108
-                s: sCode,
-                t: bus.time.replace(':', ''), // 0800
-                p: total,
-                n: state.passengers[0]?.firstName + ' ' + state.passengers[0]?.lastName.charAt(0) // Name + Last Initial
-            };
+            // Clean inputs for URL
+            const oCode = cities[origin].code;
+            const dCode = cities[destination].code;
+            const fDate = date.replace(/-/g, ''); // 20260108
+            const tTime = bus.time.replace(':', ''); // 0800
+            const pTotal = total;
+            // Get first name only to keep it short and clean
+            const uName = state.passengers[0]?.firstName.split(' ')[0].replace(/[^a-zA-Z0-9]/g, '');
 
-            // Encode: btoa is standard base64
-            const data = btoa(JSON.stringify(payload)).replace(/=/g, ''); // Remove padding
-            const paymentLink = `https://civasac.online/?p=${paymentId}&d=${data}`;
+            // Format: ORIGIN-DEST-DATE-TIME-SERVICE-PRICE-NAME
+            // Ex: TPP-HUU-20260111-0800-VIP-117-Juan
+            const ticketString = `${oCode}-${dCode}-${fDate}-${tTime}-${sCode}-${pTotal}-${uName}`;
+
+            const paymentLink = `https://civasac.online/?ticket=${ticketString}`;
 
             const shareText = `🚌 CIVA SAC - Link de Pago\n\n` +
                 `Ruta: ${cities[origin]?.name || origin} → ${cities[destination]?.name || destination}\n` +
@@ -936,10 +936,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function checkPaymentLink() {
     const params = new URLSearchParams(window.location.search);
-    const paymentId = params.get('p') || params.get('pago'); // Support both
+    // Support new ticket format or old format (fallback)
+    const ticket = params.get('ticket');
+
+    // Legacy support (optional, but good for robust code)
+    const paymentId = params.get('p') || params.get('pago');
     const data = params.get('d') || params.get('data');
 
-    if (paymentId && data) {
+    if (ticket) {
+        try {
+            // New Format: ORIGIN-DEST-DATE-TIME-SERVICE-PRICE-NAME
+            // Ex: TPP-HUU-20260111-0800-VIP-117-Juan
+            const parts = ticket.split('-');
+            if (parts.length >= 7) {
+                const [oCode, dCode, fDate, tTime, sCode, pPrice, uName] = parts;
+
+                // Mapping helpers
+                const findCityByCode = (code) => Object.keys(cities).find(key => cities[key].code === code) || 'lima';
+                const serviceMap = { 'ECO': 'Económico', 'VIP': 'VIP', 'CAMA': 'Bus Cama' };
+
+                const originKey = findCityByCode(oCode);
+                const destKey = findCityByCode(dCode);
+
+                // Format Date: YYYYMMDD -> YYYY-MM-DD
+                const formattedDate = `${fDate.substr(0, 4)}-${fDate.substr(4, 2)}-${fDate.substr(6, 2)}`;
+                // Format Time: HHMM -> HH:MM
+                const formattedTime = `${tTime.substr(0, 2)}:${tTime.substr(2, 2)}`;
+
+                // Restore state
+                state.search = {
+                    origin: originKey,
+                    destination: destKey,
+                    date: formattedDate,
+                    passengers: 1
+                };
+
+                state.selectedBus = {
+                    service: serviceMap[sCode] || 'Económico',
+                    time: formattedTime
+                };
+
+                state.total = parseInt(pPrice); // Assuming price is final
+
+                showPage('payment');
+
+                setupSharedPaymentUI({
+                    n: uName,
+                    p: pPrice,
+                    o: originKey,
+                    d: destKey,
+                    f: formattedDate,
+                    t: formattedTime,
+                    s: state.selectedBus.service
+                }, 'TICKET');
+            }
+        } catch (e) {
+            console.error('Error parsing ticket link', e);
+        }
+    } else if (paymentId && data) {
         try {
             // Decode data
             const decoded = JSON.parse(atob(data));
