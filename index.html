@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIVA SAC - Compra de Pasajes de Bus Online | Viaja Seguro</title>
+    <meta name="description"
+        content="Compra tus pasajes de bus online con CIVA SAC. Los mejores precios, buses modernos y seguridad garantizada. ¡Reserva ahora!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="container header-content">
+                <a href="#" class="logo">
+                    <img src="images/logo.png" alt="CIVA" class="logo-img">
+                </a>
+                <nav class="nav">
+                    <a href="#" class="nav-link active" onclick="showPage('home'); return false;">Inicio</a>
+                    <a href="#" class="nav-link" onclick="showPage('services'); return false;">Servicios</a>
+                    <a href="#" class="nav-link" onclick="showPage('corporate'); return false;">Servicios
+                        Corporativos</a>
+                    <a href="#" class="nav-link" onclick="showPage('contact'); return false;">Contacto</a>
+                    <a href="#" class="nav-link" onclick="showPage('tracking'); return false;">Rastrea tu envío</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn btn-ghost" id="btn-mis-viajes" onclick="showPage('mytrips')">📋 Mis
+                        Viajes</button>
+                </div>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <!-- Home Page -->
+            <section id="page-home" class="page active">
+                <!-- Hero Section -->
+                <div class="hero">
+                    <div class="hero-bg"></div>
+                    <div class="hero-pattern"></div>
+                    <div class="container hero-content">
+                        <div class="hero-badge">
+                            ⭐ Más de 50 años transportando sueños
+                        </div>
+                        <h1 class="hero-title">Viaja seguro y cómodo<br>por todo el Perú</h1>
+                        <p class="hero-subtitle">Compra tus pasajes online en segundos. Buses modernos, Wi-Fi gratis y
+                            la mejor atención.</p>
+
+                        <!-- Search Card -->
+                        <div class="search-card">
+                            <form id="search-form" class="search-form">
+                                <div class="search-field" style="position: relative;">
+                                    <label class="search-label"><span class="icon">📍</span> Origen</label>
+                                    <select id="origin" class="search-input" required>
+                                        <option value="">Ingresa una ciudad</option>
+                                        <option value="lima">Lima</option>
+                                        <option value="arequipa">Arequipa</option>
+                                        <option value="cusco">Cusco</option>
+                                        <option value="trujillo">Trujillo</option>
+                                        <option value="chiclayo">Chiclayo</option>
+                                        <option value="piura">Piura</option>
+                                        <option value="ica">Ica</option>
+                                        <option value="tacna">Tacna</option>
+                                        <option value="huancayo">Huancayo</option>
+                                        <option value="puno">Puno</option>
+                                    </select>
+                                    <button type="button" class="swap-btn" id="swap-cities">⇅</button>
+                                </div>
+                                <div class="search-field">
+                                    <label class="search-label"><span class="icon">📍</span> Destino</label>
+                                    <select id="destination" class="search-input" required>
+                                        <option value="">Ingresa el destino</option>
+                                        <option value="lima">Lima</option>
+                                        <option value="arequipa">Arequipa</option>
+                                        <option value="cusco">Cusco</option>
+                                        <option value="trujillo">Trujillo</option>
+                                        <option value="chiclayo">Chiclayo</option>
+                                        <option value="piura">Piura</option>
+                                        <option value="ica">Ica</option>
+                                        <option value="tacna">Tacna</option>
+                                        <option value="huancayo">Huancayo</option>
+                                        <option value="puno">Puno</option>
+                                    </select>
+                                </div>
+                                <div class="search-field">
+                                    <label class="search-label"><span class="icon">📅</span> Salida</label>
+                                    <input type="date" id="travel-date" class="search-input" required>
+                                </div>
+                                <div class="search-field">
+                                    <label class="search-label"><span class="icon">👥</span> Pasajeros</label>
+                                    <div class="passenger-selector">
+                                        <button type="button" class="passenger-btn" id="passenger-minus">−</button>
+                                        <span id="passenger-count">1</span>
+                                        <button type="button" class="passenger-btn" id="passenger-plus">+</button>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-search">🔍</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trust Badges -->
+                <section class="trust-section">
+                    <div class="container">
+                        <div class="trust-badges">
+                            <div class="trust-badge">
+                                <span class="trust-icon">🛡️</span>
+                                <div class="trust-text"><strong>100% Seguro</strong>Pago protegido SSL</div>
+                            </div>
+                            <div class="trust-badge">
+                                <span class="trust-icon">🚌</span>
+                                <div class="trust-text"><strong>+200 Buses</strong>Flota moderna</div>
+                            </div>
+                            <div class="trust-badge">
+                                <span class="trust-icon">📍</span>
+                                <div class="trust-text"><strong>+150 Destinos</strong>A nivel nacional</div>
+                            </div>
+                            <div class="trust-badge">
+                                <span class="trust-icon">⭐</span>
+                                <div class="trust-text"><strong>4.8/5 Estrellas</strong>Miles de reseñas</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Popular Routes -->
+                <section class="section">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title">Rutas Populares</h2>
+                            <p class="section-subtitle">Descubre los destinos favoritos de nuestros viajeros</p>
+                        </div>
+
+                        <div class="routes-grid">
+                            <div class="route-card" data-origin="lima" data-destination="arequipa">
+                                <div class="route-image"
+                                    style="background-image: url('images/arequipa.png'); background-size: cover; background-position: center;">
+                                    <span class="route-badge">⭐ Popular</span>
+                                </div>
+                                <div class="route-info">
+                                    <h3>Lima → Arequipa</h3>
+                                    <p>⏱️ 15h aprox. • 🚌 Bus Cama disponible</p>
+                                    <div class="route-price">
+                                        <div><span
+                                                style="color: var(--gray); font-size: 13px;">Desde</span><br><strong>S/
+                                                89</strong></div>
+                                        <button class="btn btn-primary">Ver horarios</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="route-card" data-origin="lima" data-destination="cusco">
+                                <div class="route-image"
+                                    style="background-image: url('images/cusco.png'); background-size: cover; background-position: center;">
+                                    <span class="route-badge">✨ Recomendado</span>
+                                </div>
+                                <div class="route-info">
+                                    <h3>Lima → Cusco</h3>
+                                    <p>⏱️ 22h aprox. • 🚌 Bus Cama disponible</p>
+                                    <div class="route-price">
+                                        <div><span
+                                                style="color: var(--gray); font-size: 13px;">Desde</span><br><strong>S/
+                                                120</strong></div>
+                                        <button class="btn btn-primary">Ver horarios</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="route-card" data-origin="lima" data-destination="trujillo">
+                                <div class="route-image"
+                                    style="background-image: url('images/trujillo.png'); background-size: cover; background-position: center;">
+                                    <span class="route-badge">🌴 Costa Norte</span>
+                                </div>
+                                <div class="route-info">
+                                    <h3>Lima → Trujillo</h3>
+                                    <p>⏱️ 8h aprox. • 🚌 Bus VIP disponible</p>
+                                    <div class="route-price">
+                                        <div><span
+                                                style="color: var(--gray); font-size: 13px;">Desde</span><br><strong>S/
+                                                65</strong></div>
+                                        <button class="btn btn-primary">Ver horarios</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="route-card" data-origin="lima" data-destination="ica">
+                                <div class="route-image"
+                                    style="background-image: url('images/ica.png'); background-size: cover; background-position: center;">
+                                    <span class="route-badge">🏜️ Oasis</span>
+                                </div>
+                                <div class="route-info">
+                                    <h3>Lima → Ica</h3>
+                                    <p>⏱️ 4h aprox. • 🚌 Bus Económico</p>
+                                    <div class="route-price">
+                                        <div><span
+                                                style="color: var(--gray); font-size: 13px;">Desde</span><br><strong>S/
+                                                45</strong></div>
+                                        <button class="btn btn-primary">Ver horarios</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Features -->
+                <section class="section section-gray">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title">¿Por qué elegir CIVA SAC?</h2>
+                            <p class="section-subtitle">Más de 50 años de experiencia nos respaldan</p>
+                        </div>
+
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">🛡️</div>
+                                <h3>Seguridad Garantizada</h3>
+                                <p>Conductores certificados, GPS en tiempo real y protocolos de seguridad estrictos.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">💺</div>
+                                <h3>Máximo Confort</h3>
+                                <p>Asientos reclinables 180°, Wi-Fi gratis, enchufes USB y servicio a bordo.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">💰</div>
+                                <h3>Mejores Precios</h3>
+                                <p>Tarifas competitivas y ofertas exclusivas para compras online.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">📱</div>
+                                <h3>Compra Fácil</h3>
+                                <p>Proceso 100% digital con confirmación instantánea en tu correo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Testimonials/Reviews -->
+                <section class="section">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title">Lo que dicen nuestros viajeros</h2>
+                            <p class="section-subtitle">Miles de pasajeros satisfechos nos recomiendan</p>
+                        </div>
+                        <div class="testimonials-grid" id="testimonials-grid">
+                            <!-- Testimonials will be loaded dynamically -->
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Results Page -->
+            <section id="page-results" class="page">
+                <div class="container">
+                    <div class="page-header">
+                        <button class="btn btn-ghost btn-back" id="back-to-home">← Volver a buscar</button>
+                        <div class="search-summary">
+                            <h2 id="search-summary-text">Lima → Arequipa</h2>
+                            <p id="search-summary-date">Selecciona tu horario preferido</p>
+                        </div>
+                    </div>
+                    <div class="results-list" id="results-list"></div>
+                </div>
+            </section>
+
+            <!-- Seats Page -->
+            <section id="page-seats" class="page">
+                <div class="container">
+                    <div class="page-header">
+                        <button class="btn btn-ghost btn-back" id="back-to-results">← Cambiar horario</button>
+                        <div class="search-summary">
+                            <h2 id="seats-bus-info">Bus VIP - 08:00</h2>
+                            <p id="seats-route-info">Selecciona tus asientos</p>
+                        </div>
+                    </div>
+                    <div class="seats-container">
+                        <div class="bus-layout">
+                            <div class="bus-header"><span>🧑‍✈️ Conductor</span><span>🚪 Puerta</span></div>
+                            <div class="bus-floors">
+                                <div class="bus-floor">
+                                    <h4>Primer Piso</h4>
+                                    <div class="seats-grid" id="first-floor-seats"></div>
+                                </div>
+                                <div class="bus-floor">
+                                    <h4>Segundo Piso</h4>
+                                    <div class="seats-grid" id="second-floor-seats"></div>
+                                </div>
+                            </div>
+                            <div class="seats-legend">
+                                <div class="legend-item">
+                                    <div class="legend-seat available"></div><span>Disponible</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-seat selected"></div><span>Seleccionado</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-seat occupied"></div><span>Ocupado</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seats-summary">
+                            <h3>Tu Selección</h3>
+                            <div id="selected-seats-list">
+                                <p class="no-seats">Selecciona tus asientos en el mapa</p>
+                            </div>
+                            <div class="summary-total"><span>Total a pagar</span><strong id="seats-total">S/
+                                    0.00</strong></div>
+                            <button class="btn btn-primary btn-full btn-lg" id="continue-to-passengers"
+                                disabled>Continuar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Passengers Page -->
+            <section id="page-passengers" class="page">
+                <div class="container">
+                    <div class="page-header">
+                        <button class="btn btn-ghost btn-back" id="back-to-seats">← Cambiar asientos</button>
+                        <div class="search-summary">
+                            <h2>Datos de Pasajeros</h2>
+                            <p>Completa la información de cada viajero</p>
+                        </div>
+                    </div>
+                    <div class="passengers-container">
+                        <div class="passengers-forms" id="passengers-forms"></div>
+                        <div class="passengers-summary">
+                            <h3>Resumen de tu viaje</h3>
+                            <div class="summary-route">
+                                <p id="summary-route-text">Lima → Arequipa</p>
+                                <p id="summary-date">📅 15 Enero 2026</p>
+                                <p id="summary-bus">🚌 Bus VIP - 08:00</p>
+                            </div>
+                            <div id="summary-seats"></div>
+                            <div class="summary-total"><span>Total</span><strong id="passengers-total">S/ 0.00</strong>
+                            </div>
+                            <button class="btn btn-primary btn-full btn-lg" id="continue-to-payment" disabled>Ir al pago
+                                seguro →</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Payment Page -->
+            <section id="page-payment" class="page">
+                <div class="container">
+                    <div class="page-header">
+                        <button class="btn btn-ghost btn-back" id="back-to-passengers">← Volver</button>
+                        <div class="search-summary">
+                            <h2>Pago Seguro</h2>
+                            <p>Tu información está protegida con encriptación SSL</p>
+                        </div>
+                    </div>
+                    <div class="payment-container">
+                        <div class="payment-form">
+                            <div class="payment-method-header">
+                                <div class="card-logos">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png"
+                                        alt="Visa" style="height: 24px;">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png"
+                                        alt="Mastercard" style="height: 24px;">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/200px-American_Express_logo_%282018%29.svg.png"
+                                        alt="Amex" style="height: 24px;">
+                                </div>
+                                <div>
+                                    <h4>Tarjeta de Crédito o Débito</h4>
+                                    <p>Visa, Mastercard, American Express, Diners</p>
+                                </div>
+                            </div>
+                            <form id="card-form" class="card-form">
+                                <div class="form-group">
+                                    <label>Número de Tarjeta</label>
+                                    <input type="tel" id="contact-phone" placeholder="4444 4444 4444 4444"
+                                        maxlength="19" required oninput="formatPhoneNumber(this)">
+                                </div>
+                                <div class="form-group">
+                                    <label>Nombre Completo</label>
+                                    <input type="text" id="contact-name" placeholder="Juan Pérez García" required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group"><label>Fecha de vencimiento</label><input type="text"
+                                            id="contact-birthdate" placeholder="MM/AA" maxlength="5" required
+                                            oninput="formatMonthYear(this)"></div>
+                                    <div class="form-group"><label>CVV</label><input type="text" id="contact-dni"
+                                            placeholder="123" maxlength="12" required></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Correo Electrónico</label>
+                                    <input type="email" id="contact-email" placeholder="correo@ejemplo.com" required>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="payment-summary">
+                            <h3>Resumen de Compra</h3>
+                            <div id="payment-summary-details"></div>
+                            <div class="summary-breakdown">
+                                <div class="breakdown-item"><span>Subtotal</span><span id="payment-subtotal">S/
+                                        0.00</span></div>
+                                <div class="breakdown-item"><span>Cargo por servicio</span><span>S/ 5.00</span></div>
+                                <div class="breakdown-item total"><span>Total a pagar</span><strong
+                                        id="payment-total">S/ 0.00</strong></div>
+                            </div>
+                            <div class="security-badges">
+                                <span>🔒 Pago 100% seguro con encriptación SSL</span>
+                                <span>🛡️ Tus datos están protegidos</span>
+                                <span>✅ Confirmación instantánea por email</span>
+                            </div>
+                            <div class="payment-notice">
+                                <span>⏰ <strong>Importante:</strong> El cargo a tu tarjeta se realizará en un máximo de
+                                    24 horas.</span>
+                            </div>
+                            <button class="btn btn-primary btn-full btn-lg" id="complete-payment">🔒 Pagar
+                                Ahora</button>
+                            <div class="share-payment">
+                                <p>¿Otra persona pagará por ti?</p>
+                                <button class="btn btn-ghost btn-full" id="share-payment-link">🔗 Compartir link de
+                                    pago</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Confirmation Page -->
+            <section id="page-confirmation" class="page">
+                <div class="container">
+                    <div class="confirmation-content">
+                        <div class="confirmation-header">
+                            <div class="success-icon">✓</div>
+                            <h1>¡Compra Exitosa!</h1>
+                            <p>Tu reserva ha sido confirmada. Revisa tu correo electrónico.</p>
+                        </div>
+                        <div class="ticket">
+                            <div class="ticket-header">
+                                <span class="ticket-logo">🚌 CIVA SAC</span>
+                                <div class="ticket-code"><span>Código de Reserva</span><strong
+                                        id="ticket-code">CIVA-ABC123</strong></div>
+                            </div>
+                            <div class="ticket-body">
+                                <div class="ticket-route">
+                                    <span id="ticket-origin">Lima</span>
+                                    <span class="arrow">→</span>
+                                    <span id="ticket-dest">Arequipa</span>
+                                </div>
+                                <div class="ticket-details">
+                                    <p>📅 <span id="ticket-date">15 Enero 2026</span></p>
+                                    <p>⏰ <span id="ticket-time">08:00</span></p>
+                                    <p>🚌 <span id="ticket-service">Bus VIP</span></p>
+                                </div>
+                                <div id="ticket-passengers"></div>
+                            </div>
+                            <div class="ticket-footer">
+                                <div class="ticket-qr" id="ticket-qr"></div>
+                                <div class="ticket-instructions">
+                                    <p><strong>Instrucciones importantes:</strong></p>
+                                    <ul>
+                                        <li>Presenta este boleto electrónico al abordar</li>
+                                        <li>Llega al terminal 30 minutos antes</li>
+                                        <li>Porta tu DNI o documento de identidad</li>
+                                        <li>El equipaje permitido es de hasta 20kg</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="confirmation-actions">
+                            <button class="btn btn-primary btn-lg" id="download-ticket">📥 Descargar Boleto</button>
+                            <button class="btn btn-ghost btn-lg" id="new-search">🔍 Nueva Búsqueda</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Page -->
+            <section id="page-services" class="page">
+                <div class="container page-container">
+                    <div class="page-hero">
+                        <h1>Nuestros Servicios</h1>
+                        <p>Ofrecemos diferentes tipos de servicio para adaptarnos a tus necesidades</p>
+                    </div>
+
+                    <div class="services-grid">
+                        <div class="service-type-card">
+                            <div class="service-icon-large">🚌</div>
+                            <h3>Bus Económico</h3>
+                            <div class="service-price-tag">Desde S/ 35</div>
+                            <ul class="service-features">
+                                <li>✓ Asientos reclinables 140°</li>
+                                <li>✓ WiFi gratuito</li>
+                                <li>✓ Baño a bordo</li>
+                                <li>✓ Aire acondicionado</li>
+                            </ul>
+                            <button class="btn btn-primary btn-full" onclick="showPage('home')">Buscar viajes</button>
+                        </div>
+
+                        <div class="service-type-card featured">
+                            <div class="featured-badge">⭐ Más Popular</div>
+                            <div class="service-icon-large">💺</div>
+                            <h3>Bus VIP</h3>
+                            <div class="service-price-tag">Desde S/ 65</div>
+                            <ul class="service-features">
+                                <li>✓ Asientos reclinables 160°</li>
+                                <li>✓ WiFi de alta velocidad</li>
+                                <li>✓ Enchufes USB</li>
+                                <li>✓ Manta y almohada</li>
+                                <li>✓ Servicio a bordo</li>
+                            </ul>
+                            <button class="btn btn-primary btn-full" onclick="showPage('home')">Buscar viajes</button>
+                        </div>
+
+                        <div class="service-type-card premium">
+                            <div class="featured-badge">👑 Premium</div>
+                            <div class="service-icon-large">🛏️</div>
+                            <h3>Bus Cama</h3>
+                            <div class="service-price-tag">Desde S/ 95</div>
+                            <ul class="service-features">
+                                <li>✓ Asientos 180° tipo cama</li>
+                                <li>✓ WiFi premium</li>
+                                <li>✓ Pantalla personal</li>
+                                <li>✓ Cena y desayuno incluido</li>
+                                <li>✓ Kit de viaje completo</li>
+                                <li>✓ Mayor espacio entre asientos</li>
+                            </ul>
+                            <button class="btn btn-primary btn-full" onclick="showPage('home')">Buscar viajes</button>
+                        </div>
+                    </div>
+
+                    <div class="service-extras">
+                        <h2>Servicios Adicionales</h2>
+                        <div class="extras-grid">
+                            <div class="extra-card"><span>📦</span>
+                                <h4>Encomiendas</h4>
+                                <p>Envía paquetes a nivel nacional</p>
+                            </div>
+                            <div class="extra-card"><span>🚐</span>
+                                <h4>Transporte de Carga</h4>
+                                <p>Para empresas y comercios</p>
+                            </div>
+                            <div class="extra-card"><span>🎫</span>
+                                <h4>Boletos Abiertos</h4>
+                                <p>Viaja cuando quieras</p>
+                            </div>
+                            <div class="extra-card"><span>👥</span>
+                                <h4>Grupos</h4>
+                                <p>Tarifas especiales para grupos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Corporate Services Page -->
+            <section id="page-corporate" class="page">
+                <div class="container page-container">
+                    <div class="page-hero">
+                        <h1>Servicios Corporativos</h1>
+                        <p>Soluciones de transporte personalizadas para tu empresa</p>
+                    </div>
+
+                    <div class="corporate-benefits">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">💼</div>
+                            <h3>Tarifas Corporativas</h3>
+                            <p>Descuentos exclusivos del 15-30% para empresas con convenio. Facturación mensual y
+                                reporte detallado de viajes.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">📊</div>
+                            <h3>Panel de Control</h3>
+                            <p>Gestiona todos los viajes de tu empresa desde un solo lugar. Control de presupuesto y
+                                aprobaciones.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">🚌</div>
+                            <h3>Buses Privados</h3>
+                            <p>Alquiler de buses para eventos, traslado de personal y excursiones empresariales.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">📞</div>
+                            <h3>Atención Preferencial</h3>
+                            <p>Ejecutivo de cuenta dedicado y línea directa de atención 24/7 para tu empresa.</p>
+                        </div>
+                    </div>
+
+                    <div class="corporate-form-section">
+                        <h2>Solicita información para tu empresa</h2>
+                        <form class="corporate-form" id="corporate-form">
+                            <div class="form-row">
+                                <div class="form-group"><label>Nombre de la Empresa</label><input type="text"
+                                        placeholder="Ej: Minera del Sur S.A.C." required></div>
+                                <div class="form-group"><label>RUC</label><input type="text" placeholder="20123456789"
+                                        maxlength="11" required></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Nombre del Contacto</label><input type="text"
+                                        placeholder="Juan Pérez" required></div>
+                                <div class="form-group"><label>Cargo</label><input type="text"
+                                        placeholder="Gerente de Operaciones"></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Email Corporativo</label><input type="email"
+                                        placeholder="contacto@empresa.com" required></div>
+                                <div class="form-group"><label>Teléfono</label><input type="tel"
+                                        placeholder="(01) 234-5678" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label>¿Qué servicio te interesa?</label>
+                                <select required>
+                                    <option value="">Selecciona una opción</option>
+                                    <option>Convenio de pasajes corporativos</option>
+                                    <option>Alquiler de buses</option>
+                                    <option>Transporte de personal</option>
+                                    <option>Envío de encomiendas</option>
+                                    <option>Todos los servicios</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Mensaje adicional</label>
+                                <textarea rows="4"
+                                    placeholder="Cuéntanos más sobre las necesidades de tu empresa..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg">Enviar Solicitud</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Page -->
+            <section id="page-contact" class="page">
+                <div class="container page-container">
+                    <div class="page-hero">
+                        <h1>Contáctanos</h1>
+                        <p>Estamos aquí para ayudarte</p>
+                    </div>
+
+                    <div class="contact-grid">
+                        <div class="contact-info">
+                            <div class="contact-card">
+                                <div class="contact-icon">📧</div>
+                                <h3>Correo Electrónico</h3>
+                                <p class="contact-main">info@civasac.com.pe</p>
+                                <p>Respuesta en máximo 24 horas</p>
+                            </div>
+                            <div class="contact-card">
+                                <div class="contact-icon">📍</div>
+                                <h3>Terminal Principal</h3>
+                                <p class="contact-main">Av. 28 de Julio 2195</p>
+                                <p>La Victoria, Lima - Perú</p>
+                            </div>
+                            <div class="contact-card">
+                                <div class="contact-icon">🕐</div>
+                                <h3>Horario de Atención</h3>
+                                <p class="contact-main">6:00 AM - 10:00 PM</p>
+                                <p>Todos los días del año</p>
+                            </div>
+                            <div class="contact-card">
+                                <div class="contact-icon">🏢</div>
+                                <h3>Oficina Administrativa</h3>
+                                <p class="contact-main">Jr. Lampa 1298, Lima</p>
+                                <p>Cercado de Lima</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-form-section">
+                            <h2>Envíanos un mensaje</h2>
+                            <form class="contact-form" id="contact-form">
+                                <div class="form-row">
+                                    <div class="form-group"><label>Nombre</label><input type="text"
+                                            placeholder="Tu nombre" required></div>
+                                    <div class="form-group"><label>Email</label><input type="email"
+                                            placeholder="tu@email.com" required></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Asunto</label>
+                                    <select required>
+                                        <option value="">Selecciona un asunto</option>
+                                        <option>Consulta sobre viajes</option>
+                                        <option>Cambio de pasaje</option>
+                                        <option>Reclamo</option>
+                                        <option>Sugerencia</option>
+                                        <option>Objetos perdidos</option>
+                                        <option>Otro</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mensaje</label>
+                                    <textarea rows="5" placeholder="¿En qué podemos ayudarte?" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg">Enviar Mensaje</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="terminals-section">
+                        <h2>Nuestros Terminales</h2>
+                        <div class="terminals-grid">
+                            <div class="terminal-card">
+                                <h4>Lima</h4>
+                                <p>Av. 28 de Julio 2195, La Victoria</p><span>📧 lima@civasac.com.pe</span>
+                            </div>
+                            <div class="terminal-card">
+                                <h4>Arequipa</h4>
+                                <p>Terminal Terrestre, Módulo 38</p><span>📧 arequipa@civasac.com.pe</span>
+                            </div>
+                            <div class="terminal-card">
+                                <h4>Cusco</h4>
+                                <p>Terminal Terrestre, Counter 15</p><span>📧 cusco@civasac.com.pe</span>
+                            </div>
+                            <div class="terminal-card">
+                                <h4>Trujillo</h4>
+                                <p>Av. América Sur 2857</p><span>📧 trujillo@civasac.com.pe</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Track Shipment Page -->
+            <section id="page-tracking" class="page">
+                <div class="container page-container">
+                    <div class="page-hero">
+                        <h1>Rastrea tu Envío</h1>
+                        <p>Ingresa el código de tu encomienda para conocer su estado</p>
+                    </div>
+
+                    <div class="tracking-section">
+                        <div class="tracking-form-card">
+                            <form id="tracking-form" class="tracking-form">
+                                <div class="form-group">
+                                    <label>Código de Seguimiento</label>
+                                    <input type="text" id="tracking-code" placeholder="Ej: ENV-2024-ABC123" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-full">🔍 Rastrear Envío</button>
+                            </form>
+                        </div>
+
+                        <div id="tracking-result" class="tracking-result" style="display: none;">
+                            <div class="tracking-header">
+                                <h3>Estado del Envío</h3>
+                                <span id="tracking-status" class="status-badge">En tránsito</span>
+                            </div>
+                            <div class="tracking-timeline">
+                                <div class="timeline-item completed">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>Recibido en origen</h4>
+                                        <p>Lima - 08 Ene 2026, 09:00</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item completed">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>En proceso de despacho</h4>
+                                        <p>Lima - 08 Ene 2026, 10:30</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item active">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>En tránsito</h4>
+                                        <p>Camino a Arequipa</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>Llegada a destino</h4>
+                                        <p>Pendiente</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>Entregado</h4>
+                                        <p>Pendiente</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tracking-info">
+                            <h3>Información sobre envíos</h3>
+                            <div class="info-cards">
+                                <div class="info-card"><span>📦</span>
+                                    <h4>Encomiendas</h4>
+                                    <p>Envía paquetes de hasta 30kg</p>
+                                </div>
+                                <div class="info-card"><span>⏰</span>
+                                    <h4>Horarios</h4>
+                                    <p>Recepción: 6am - 10pm</p>
+                                </div>
+                                <div class="info-card"><span>🛡️</span>
+                                    <h4>Seguro</h4>
+                                    <p>Todos los envíos asegurados</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Trips Page -->
+            <section id="page-mytrips" class="page">
+                <div class="container page-container">
+                    <div class="page-hero">
+                        <h1>Mis Viajes</h1>
+                        <p>Consulta tus reservas y boletos</p>
+                    </div>
+
+                    <div class="mytrips-search">
+                        <div class="search-trip-card">
+                            <h3>Buscar mi reserva</h3>
+                            <form id="mytrips-form" class="mytrips-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Código de Reserva</label>
+                                        <input type="text" id="reservation-code" placeholder="Ej: CIVA-ABC123" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>DNI del Pasajero</label>
+                                        <input type="text" id="passenger-dni" placeholder="12345678" maxlength="8"
+                                            required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg">Buscar Reserva</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="mytrips-result" class="mytrips-result" style="display: none;">
+                        <div class="trip-card-large">
+                            <div class="trip-header">
+                                <div>
+                                    <h3>Lima → Arequipa</h3>
+                                    <p>Bus VIP · Salida 08:00</p>
+                                </div>
+                                <span class="trip-status confirmed">✓ Confirmado</span>
+                            </div>
+                            <div class="trip-details">
+                                <div class="trip-detail"><span>📅</span>
+                                    <p><strong>Fecha</strong>15 Enero 2026</p>
+                                </div>
+                                <div class="trip-detail"><span>💺</span>
+                                    <p><strong>Asiento</strong>12</p>
+                                </div>
+                                <div class="trip-detail"><span>📍</span>
+                                    <p><strong>Terminal</strong>Av. 28 de Julio 2195</p>
+                                </div>
+                            </div>
+                            <div class="trip-actions">
+                                <button class="btn btn-primary">📥 Descargar Boleto</button>
+                                <button class="btn btn-ghost">🔄 Cambiar Fecha</button>
+                                <button class="btn btn-ghost danger">❌ Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mytrips-help">
+                        <h3>¿Necesitas ayuda?</h3>
+                        <div class="help-options">
+                            <div class="help-card" onclick="showPage('contact')"><span>📞</span>
+                                <p>Contactar soporte</p>
+                            </div>
+                            <div class="help-card"><span>❓</span>
+                                <p>Preguntas frecuentes</p>
+                            </div>
+                            <div class="help-card"><span>📝</span>
+                                <p>Políticas de cambio</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Us Page -->
+            <section id="page-about" class="page">
+                <div class="container page-container">
+                    <div class="page-hero">
+                        <h1>Sobre Nosotros</h1>
+                        <p>Más de 50 años conectando al Perú</p>
+                    </div>
+                    <div class="about-content">
+                        <div class="about-intro">
+                            <h2>Nuestra Historia</h2>
+                            <p>CIVA SAC nació en 1971 con la visión de conectar a todos los peruanos de manera segura,
+                                cómoda y accesible. Lo que comenzó como una pequeña empresa familiar se ha convertido en
+                                una de las compañías de transporte terrestre más importantes del país.</p>
+                            <p>Hoy contamos con una flota moderna de más de 200 buses que recorren más de 50 destinos a
+                                nivel nacional, transportando a millones de pasajeros cada año.</p>
+                        </div>
+                        <div class="about-stats">
+                            <div class="stat-card"><span class="stat-number">50+</span>
+                                <p>Años de experiencia</p>
+                            </div>
+                            <div class="stat-card"><span class="stat-number">200+</span>
+                                <p>Buses modernos</p>
+                            </div>
+                            <div class="stat-card"><span class="stat-number">50+</span>
+                                <p>Destinos nacionales</p>
+                            </div>
+                            <div class="stat-card"><span class="stat-number">5M+</span>
+                                <p>Pasajeros anuales</p>
+                            </div>
+                        </div>
+                        <div class="about-values">
+                            <h2>Nuestros Valores</h2>
+                            <div class="values-grid">
+                                <div class="value-card"><span>🛡️</span>
+                                    <h4>Seguridad</h4>
+                                    <p>Tu bienestar es nuestra prioridad número uno</p>
+                                </div>
+                                <div class="value-card"><span>⏰</span>
+                                    <h4>Puntualidad</h4>
+                                    <p>Respetamos tu tiempo, llegamos a la hora</p>
+                                </div>
+                                <div class="value-card"><span>💚</span>
+                                    <h4>Compromiso</h4>
+                                    <p>Servicio de calidad en cada viaje</p>
+                                </div>
+                                <div class="value-card"><span>🌱</span>
+                                    <h4>Sostenibilidad</h4>
+                                    <p>Cuidamos el medio ambiente</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Work With Us Page -->
+            <section id="page-careers" class="page">
+                <div class="container page-container">
+                    <div class="page-hero">
+                        <h1>Trabaja con Nosotros</h1>
+                        <p>Únete a la familia CIVA</p>
+                    </div>
+                    <div class="careers-content">
+                        <div class="careers-intro">
+                            <h2>¿Por qué trabajar en CIVA?</h2>
+                            <p>Somos más de 2,000 colaboradores comprometidos con brindar el mejor servicio. Ofrecemos
+                                un ambiente de trabajo dinámico, oportunidades de crecimiento y beneficios competitivos.
+                            </p>
+                        </div>
+                        <div class="benefits-grid">
+                            <div class="benefit-item"><span>💰</span>
+                                <h4>Salario competitivo</h4>
+                            </div>
+                            <div class="benefit-item"><span>🏥</span>
+                                <h4>Seguro de salud</h4>
+                            </div>
+                            <div class="benefit-item"><span>📚</span>
+                                <h4>Capacitación continua</h4>
+                            </div>
+                            <div class="benefit-item"><span>🎯</span>
+                                <h4>Línea de carrera</h4>
+                            </div>
+                        </div>
+                        <div class="job-listings">
+                            <h2>Vacantes Disponibles</h2>
+                            <div class="job-card">
+                                <h4>Conductor de Bus Interprovincial</h4>
+                                <p>📍 Lima, Arequipa, Cusco</p><span class="job-type">Tiempo completo</span>
+                            </div>
+                            <div class="job-card">
+                                <h4>Auxiliar de Bus</h4>
+                                <p>📍 Todas las sedes</p><span class="job-type">Tiempo completo</span>
+                            </div>
+                            <div class="job-card">
+                                <h4>Ejecutivo de Ventas Counter</h4>
+                                <p>📍 Lima, Trujillo</p><span class="job-type">Tiempo completo</span>
+                            </div>
+                            <div class="job-card">
+                                <h4>Técnico de Mantenimiento</h4>
+                                <p>📍 Lima</p><span class="job-type">Tiempo completo</span>
+                            </div>
+                        </div>
+                        <div class="apply-section">
+                            <h3>Envía tu CV a:</h3>
+                            <p class="apply-email">📧 rrhh@civasac.com.pe</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Press Room Page -->
+            <section id="page-press" class="page">
+                <div class="container page-container">
+                    <div class="page-hero">
+                        <h1>Sala de Prensa</h1>
+                        <p>Noticias y comunicados oficiales de CIVA SAC</p>
+                    </div>
+                    <div class="press-content">
+                        <div class="press-card"><span class="press-date">08 Ene 2026</span>
+                            <h3>CIVA incorpora 20 nuevos buses ecoamigables</h3>
+                            <p>Renovamos nuestra flota con buses Euro 6 de menor impacto ambiental.</p>
+                        </div>
+                        <div class="press-card"><span class="press-date">15 Dic 2025</span>
+                            <h3>Nueva ruta Lima - Cajamarca inaugurada</h3>
+                            <p>Ampliamos nuestra cobertura con salidas diarias a la ciudad norteña.</p>
+                        </div>
+                        <div class="press-card"><span class="press-date">01 Dic 2025</span>
+                            <h3>CIVA recibe certificación ISO 9001:2015</h3>
+                            <p>Reconocimiento a nuestro sistema de gestión de calidad.</p>
+                        </div>
+                        <div class="press-card"><span class="press-date">20 Nov 2025</span>
+                            <h3>Campaña de seguridad vial "Llegamos Bien"</h3>
+                            <p>Lanzamos iniciativa para concientizar sobre seguridad en carretera.</p>
+                        </div>
+                        <div class="press-contact">
+                            <h3>Contacto de Prensa</h3>
+                            <p>📧 prensa@civasac.com.pe</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Page -->
+            <section id="page-faq" class="page">
+                <div class="container page-container">
+                    <div class="page-hero">
+                        <h1>Preguntas Frecuentes</h1>
+                        <p>Encuentra respuestas a las dudas más comunes</p>
+                    </div>
+                    <div class="faq-content">
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(this)"><span>¿Cómo compro un pasaje en
+                                    línea?</span><span class="faq-icon">+</span></div>
+                            <div class="faq-answer">
+                                <p>Ingresa a nuestra web, selecciona tu origen, destino y fecha. Elige el horario,
+                                    selecciona tus asientos, completa tus datos y realiza el pago con tarjeta.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(this)"><span>¿Puedo cambiar la fecha de mi
+                                    pasaje?</span><span class="faq-icon">+</span></div>
+                            <div class="faq-answer">
+                                <p>Sí, puedes cambiar la fecha hasta 4 horas antes de la salida sin costo adicional
+                                    (sujeto a disponibilidad). Después de ese tiempo aplica un cargo del 20%.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(this)"><span>¿Qué documentos necesito para
+                                    viajar?</span><span class="faq-icon">+</span></div>
+                            <div class="faq-answer">
+                                <p>DNI original vigente para adultos. Menores de edad deben viajar con DNI y partida de
+                                    nacimiento, acompañados de un adulto o con autorización notarial.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(this)"><span>¿Cuánto equipaje puedo
+                                    llevar?</span><span class="faq-icon">+</span></div>
+                            <div class="faq-answer">
+                                <p>Cada pasajero puede llevar 1 equipaje de bodega (hasta 20kg) y 1 equipaje de mano
+                                    (hasta 5kg). El exceso tiene costo adicional.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(this)"><span>¿Los buses tienen
+                                    WiFi?</span><span class="faq-icon">+</span></div>
+                            <div class="faq-answer">
+                                <p>Sí, todos nuestros buses cuentan con WiFi gratuito para pasajeros. La velocidad puede
+                                    variar según la cobertura de la zona.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(this)"><span>¿Cómo solicito
+                                    factura?</span><span class="faq-icon">+</span></div>
+                            <div class="faq-answer">
+                                <p>Al momento de la compra puedes ingresar tus datos de facturación (RUC). También
+                                    puedes solicitarla después enviando un correo a facturacion@civasac.com.pe</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Travel Policies Page -->
+            <section id="page-policies" class="page">
+                <div class="container page-container">
+                    <div class="page-hero">
+                        <h1>Políticas de Viaje</h1>
+                        <p>Información importante para tu viaje</p>
+                    </div>
+                    <div class="policies-content">
+                        <div class="policy-section">
+                            <h3>🎫 Compra y Boletos</h3>
+                            <ul>
+                                <li>Los boletos son personales e intransferibles</li>
+                                <li>Debe presentar el boleto impreso o digital al abordar</li>
+                                <li>Llegue al terminal 30 minutos antes de la salida</li>
+                            </ul>
+                        </div>
+                        <div class="policy-section">
+                            <h3>🔄 Cambios y Cancelaciones</h3>
+                            <ul>
+                                <li>Cambios sin costo hasta 4 horas antes de la salida</li>
+                                <li>Cambios con cargo del 20% después de ese tiempo</li>
+                                <li>Cancelaciones tienen penalidad del 30%</li>
+                                <li>No hay reembolso por no presentación</li>
+                            </ul>
+                        </div>
+                        <div class="policy-section">
+                            <h3>🧳 Equipaje</h3>
+                            <ul>
+                                <li>Equipaje de bodega: hasta 20kg incluido</li>
+                                <li>Equipaje de mano: hasta 5kg incluido</li>
+                                <li>Exceso de equipaje: S/ 3 por kg adicional</li>
+                                <li>No se aceptan materiales peligrosos</li>
+                            </ul>
+                        </div>
+                        <div class="policy-section">
+                            <h3>👶 Menores de Edad</h3>
+                            <ul>
+                                <li>Menores de 5 años: viaje gratuito sin asiento</li>
+                                <li>Menores de 18 años: deben viajar con adulto o autorización notarial</li>
+                                <li>Documento requerido: DNI + partida de nacimiento</li>
+                            </ul>
+                        </div>
+                        <div class="policy-section">
+                            <h3>🐕 Mascotas</h3>
+                            <ul>
+                                <li>Se permiten mascotas pequeñas en transportín</li>
+                                <li>Peso máximo: 8kg incluyendo transportín</li>
+                                <li>Cargo adicional: S/ 30</li>
+                                <li>Requiere carnet de vacunación vigente</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Terms and Conditions Page -->
+            <section id="page-terms" class="page">
+                <div class="container page-container">
+                    <div class="page-hero">
+                        <h1>Términos y Condiciones</h1>
+                        <p>Condiciones del servicio de CIVA SAC</p>
+                    </div>
+                    <div class="terms-content">
+                        <div class="terms-section">
+                            <h3>1. Aceptación de Términos</h3>
+                            <p>Al utilizar los servicios de CIVA SAC, usted acepta estos términos y condiciones en su
+                                totalidad. Si no está de acuerdo, le pedimos no utilizar nuestros servicios.</p>
+                        </div>
+                        <div class="terms-section">
+                            <h3>2. Servicios</h3>
+                            <p>CIVA SAC brinda servicios de transporte terrestre interprovincial de pasajeros,
+                                encomiendas y servicios conexos en el territorio peruano.</p>
+                        </div>
+                        <div class="terms-section">
+                            <h3>3. Responsabilidad</h3>
+                            <p>CIVA SAC se compromete a transportar al pasajero y su equipaje de manera segura. No nos
+                                responsabilizamos por objetos de valor no declarados, demoras por causas de fuerza
+                                mayor, o daños causados por terceros.</p>
+                        </div>
+                        <div class="terms-section">
+                            <h3>4. Derechos del Pasajero</h3>
+                            <p>El pasajero tiene derecho a: recibir un servicio seguro y de calidad, información clara
+                                sobre el servicio, atención de reclamos, y reembolso según las políticas establecidas.
+                            </p>
+                        </div>
+                        <div class="terms-section">
+                            <h3>5. Obligaciones del Pasajero</h3>
+                            <p>El pasajero debe: presentarse 30 minutos antes, portar documento de identidad válido,
+                                respetar las normas del bus, y no portar sustancias prohibidas.</p>
+                        </div>
+                        <div class="terms-section">
+                            <h3>6. Protección de Datos</h3>
+                            <p>Sus datos personales serán tratados conforme a la Ley N° 29733 de Protección de Datos
+                                Personales. Consulte nuestra Política de Privacidad para más información.</p>
+                        </div>
+                        <div class="terms-update">
+                            <p><strong>Última actualización:</strong> Enero 2026</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Complaints Book Page -->
+            <section id="page-complaints" class="page">
+                <div class="container page-container">
+                    <div class="page-hero">
+                        <h1>Libro de Reclamaciones</h1>
+                        <p>Tu opinión nos ayuda a mejorar</p>
+                    </div>
+                    <div class="complaints-content">
+                        <div class="complaints-info">
+                            <p>📋 Conforme al D.S. Nº 011-2011-PCM, ponemos a tu disposición el Libro de Reclamaciones.
+                            </p>
+                            <p>Responderemos tu reclamo en un plazo máximo de 30 días calendario.</p>
+                        </div>
+                        <form class="complaints-form" id="complaints-form">
+                            <h3>Datos del Usuario</h3>
+                            <div class="form-row">
+                                <div class="form-group"><label>Nombres</label><input type="text" required></div>
+                                <div class="form-group"><label>Apellidos</label><input type="text" required></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Tipo de Documento</label><select required>
+                                        <option>DNI</option>
+                                        <option>Pasaporte</option>
+                                        <option>CE</option>
+                                    </select></div>
+                                <div class="form-group"><label>Número de Documento</label><input type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Email</label><input type="email" required></div>
+                                <div class="form-group"><label>Teléfono</label><input type="tel" required></div>
+                            </div>
+                            <div class="form-group"><label>Dirección</label><input type="text" required></div>
+                            <h3>Detalle de la Reclamación</h3>
+                            <div class="form-row">
+                                <div class="form-group"><label>Tipo</label><select required>
+                                        <option value="">Seleccione...</option>
+                                        <option>Reclamo</option>
+                                        <option>Queja</option>
+                                    </select></div>
+                                <div class="form-group"><label>Fecha del Incidente</label><input type="date" required>
+                                </div>
+                            </div>
+                            <div class="form-group"><label>Descripción detallada</label><textarea rows="5"
+                                    placeholder="Describa su reclamo con el mayor detalle posible..."
+                                    required></textarea></div>
+                            <div class="form-group"><label>Pedido</label><textarea rows="3"
+                                    placeholder="¿Qué solución espera recibir?" required></textarea></div>
+                            <button type="submit" class="btn btn-primary btn-lg">Enviar Reclamación</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <a href="#" class="logo">
+                            <img src="images/logo.png" alt="CIVA" class="logo-img footer-logo">
+                        </a>
+                        <p>Tu compañero de viaje confiable. Más de 50 años conectando el Perú con seguridad, puntualidad
+                            y el mejor servicio.</p>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Empresa</h4>
+                        <a href="#" onclick="showPage('about'); return false;">Sobre Nosotros</a>
+                        <a href="#" onclick="showPage('services'); return false;">Nuestros Servicios</a>
+                        <a href="#" onclick="showPage('careers'); return false;">Trabaja con Nosotros</a>
+                        <a href="#" onclick="showPage('press'); return false;">Sala de Prensa</a>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Ayuda</h4>
+                        <a href="#" onclick="showPage('faq'); return false;">Preguntas Frecuentes</a>
+                        <a href="#" onclick="showPage('policies'); return false;">Políticas de Viaje</a>
+                        <a href="#" onclick="showPage('terms'); return false;">Términos y Condiciones</a>
+                        <a href="#" onclick="showPage('complaints'); return false;">Libro de Reclamaciones</a>
+                    </div>
+                    <div class="footer-contact">
+                        <h4>Contáctanos</h4>
+                        <p>📧 info@civasac.com.pe</p>
+                        <p>📍 Av. 28 de Julio 2195, La Victoria</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2026 CIVA SAC. Todos los derechos reservados. RUC: 20100116392</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loading-overlay">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Procesando tu solicitud...</p>
+            </div>
+        </div>
+
+        <!-- Purchase Notification Toast -->
+        <div class="purchase-toast" id="purchase-toast">
+            <div class="toast-icon">🎫</div>
+            <div class="toast-content">
+                <p class="toast-name" id="toast-name">María García</p>
+                <p class="toast-action" id="toast-action">compró un pasaje Lima → Arequipa</p>
+                <p class="toast-time">hace 2 minutos</p>
+            </div>
+            <button class="toast-close" id="toast-close">×</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
